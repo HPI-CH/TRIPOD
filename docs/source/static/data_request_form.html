@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TRIPOD access request form</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #eee;
+      }
+      body {
+      background-size: cover;
+      }
+      h1, h2 {
+      text-transform: uppercase;
+      font-weight: 400;
+      }
+      h2 {
+      margin: 0 0 0 8px;
+      }
+      .main-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.5); 
+      }
+      .left-part, form {
+      padding: 25px;
+      }
+      .left-part {
+      text-align: center;
+      }
+      .fa-graduation-cap {
+      font-size: 72px;
+      }
+      form {
+      background: rgba(0, 0, 0, 0.7); 
+      }
+      .title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      }
+      .info {
+      display: flex;
+      flex-direction: column;
+      }
+      input, select {
+      padding: 5px;
+      margin-bottom: 30px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #eee;
+      }
+      input::placeholder {
+      color: #eee;
+      }
+      option:focus {
+      border: none;
+      }
+      option {
+      background: black; 
+      border: none;
+      }
+      .checkbox input {
+      margin: 0 10px 0 0;
+      vertical-align: middle;
+      }
+      .checkbox a {
+      color: #26a9e0;
+      }
+      .checkbox a:hover {
+      color: #85d6de;
+      }
+      .btn-item, button {
+      padding: 10px 5px;
+      margin-top: 20px;
+      border-radius: 5px; 
+      border: none;
+      background: #26a9e0; 
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+      color: #fff;
+      }
+      .btn-item {
+      display: inline-block;
+      margin: 20px 5px 0;
+      }
+      button {
+      width: 100%;
+      }
+      button:hover, .btn-item:hover {
+      background: #85d6de;
+      }
+      @media (min-width: 568px) {
+      html, body {
+      height: 100%;
+      }
+      .main-block {
+      flex-direction: row;
+      height: calc(100% - 50px);
+      }
+      .left-part, form {
+      flex: 1;
+      height: auto;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-block">
+      <div class="left-part">
+        <i class="fas fa-graduation-cap"></i>
+        <h1>Request access to the TRIPOD dataset</h1>
+        <p>The TRIPOD dataset may be shared upon request for scientific use only.</p>
+        <p>Please submit the form with all relevant information to gain access.</p>
+        <p>For more information see <a href=" ">this paper</a></p>
+      </div>
+      <form action="https://formspree.io/f/mbjpqweg" method="POST">
+        <div class="title">
+          <i class="fas fa-pencil-alt"></i> 
+          <h2>Contact Information</h2>
+        </div>
+        <div class="info">
+          <input class="fname" type="text" name="firstname" placeholder="First name" required>
+          <input class="fname" type="text" name="name" placeholder="Last name" required>
+          <input type="text" name="email" placeholder="Email" required>
+        </div>
+        <div class="title">
+          <i class="fas fa-pencil-alt"></i> 
+          <h2>Research context</h2>
+        </div>
+ <div class="info">
+          <input type="text" name="scientist affiliation" placeholder="Affiliation">
+          <input type="text" name="collaborators" placeholder="Collaborating Institutions">
+<textarea rows="4" cols="50" name="study description" placeholder="Short description of the purpose of the study" required></textarea>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" name="checkbox" required><span>I hereby consent to the processing of the personal data that I have provided for
+          the sole purpose of proving a legitimate scientific interest.</span>
+          <span>Furthermore, I assure to use the provided dataset for the named purpose only, to not share it with any third party and respect the <a href="./license.pdf" target="_blank">license agreement</a>.</span>
+        </div>
+        <button type="submit" href="/">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+subject,run,stance_magnitude_threshold_left,stance_magnitude_threshold_right,stance_count_threshold_left,stance_count_threshold_right
+Sub_FZ,PWS,0.6827034316871341,0.6827034316871341,8,8
+Sub_FZ,PWS+20,0.7961260502905174,0.7961260502905174,8,8
+Sub_FZ,PWS-20,0.7525666217716238,0.45793124385459727,8,8
