@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.pipeline package &#8212; TRIPOD 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.data_reader package" href="src.data_reader.html" />
+    <link rel="prev" title="src.preprocessing package" href="src.preprocessing.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.data_reader.html" title="src.data_reader package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.preprocessing.html" title="src.preprocessing package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" accesskey="U">src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.pipeline package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="src-pipeline-package">
+<h1>src.pipeline package<a class="headerlink" href="#src-pipeline-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-src.pipeline.pipeline">
+<span id="src-pipeline-pipeline-module"></span><h2>src.pipeline.pipeline module<a class="headerlink" href="#module-src.pipeline.pipeline" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the pipeline class.</p>
+<dl class="py class">
+<dt id="src.pipeline.pipeline.Pipeline">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.pipeline.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pipeline_config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class is the skeleton for all possible pipeline instantiations.</p>
+<p>It is instantiated with a config dictionary that defines the different variable components
+of the pipeline, the data source and auxillary variables.</p>
+<dl class="py method">
+<dt id="src.pipeline.pipeline.Pipeline.add_to_evaluator">
+<code class="sig-name descname">add_to_evaluator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subject_num</span></em>, <em class="sig-param"><span class="n">run_num</span></em>, <em class="sig-param"><span class="n">reference_data</span></em>, <em class="sig-param"><span class="n">gait_parameters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline.add_to_evaluator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add estimated gait parameters and reference data for one subject and run to the evaluator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subject_num</strong> (<em>int</em>) – subject index</p></li>
+<li><p><strong>run_num</strong> (<em>int</em>) – run index</p></li>
+<li><p><strong>reference_data</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>DataFrame</em><em>]</em>) – DataFrames with reference gait parameters for the left and right foot</p></li>
+<li><p><strong>gait_parameters</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>DataFrame</em><em>]</em>) – DataFrame with the estimated gait parameters for the left and right foot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.pipeline.Pipeline.calculate_gait_parameters">
+<code class="sig-name descname">calculate_gait_parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gait_events</span></em>, <em class="sig-param"><span class="n">trajectories</span></em>, <em class="sig-param"><span class="n">imu_ic</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline.calculate_gait_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate gait parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gait_events</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>]</em>) – IC and FO samples and timestamps for the right and left foot</p></li>
+<li><p><strong>trajectories</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>DataFrame</em><em>]</em>) – DataFrames with trajectory information for the right and left foot</p></li>
+<li><p><strong>imu_ic</strong> (<em>float</em>) – Inital contact timestamp</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame with the estimated gait parameters for the left and right foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.pipeline.Pipeline.detect_gait_events">
+<code class="sig-name descname">detect_gait_events</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline.detect_gait_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform gait event detection with the gait event detector specified in the config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>imus</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a><em>]</em>) – IMU objects for each sensor location</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>IC and FO samples and timestamps for the right and left foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.pipeline.Pipeline.estimate_trajectories">
+<code class="sig-name descname">estimate_trajectories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subject_num</span></em>, <em class="sig-param"><span class="n">run_num</span></em>, <em class="sig-param"><span class="n">imus</span></em>, <em class="sig-param"><span class="n">imu_ic</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline.estimate_trajectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate left and right foot trajectories using the specified trajectory estimation algorithm.
+Subject and run need to be identified since the trajectory estimator uses caching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subject_num</strong> (<em>int</em>) – subject index</p></li>
+<li><p><strong>run_num</strong> (<em>int</em>) – run index</p></li>
+<li><p><strong>imus</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a><em>]</em>) – IMU objects for each sensor location</p></li>
+<li><p><strong>imu_ic</strong> (<em>float</em>) – Inital contact timestamp</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrames with trajectory information for the right and left foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.pipeline.Pipeline.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subject_runs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Core function of the pipeline.
+For each subject and run:
+Load IMU data, estimate trajectories, detect gait events,
+calculate estimated gait parameters, add them together with the
+reference_data to the evaluator.
+Exectue the evaluator with the results of all runs altogether.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subject_runs</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Index of the subject and run whose data should be loaded</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.pipeline.Pipeline.load_data">
+<code class="sig-name descname">load_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subject_num</span></em>, <em class="sig-param"><span class="n">run_num</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline.load_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load all IMU data for the given subject_num and run_num from the IMU folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subject_num</strong> (<em>int</em>) – Index of the subject whose data should be loaded</p></li>
+<li><p><strong>run_num</strong> (<em>int</em>) – Index of the run/trial that should be loaded</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple of a dictionary of IMU objects and the timestamp of initial contact in seconds</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple[dict[str, <a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU">IMU</a>], float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.pipeline.Pipeline.load_reference_data">
+<code class="sig-name descname">load_reference_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subject_num</span></em>, <em class="sig-param"><span class="n">run_num</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.pipeline.Pipeline.load_reference_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load reference data with the specified reference loader.
+Note: subject and run need to be identified since the reference loader uses caching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subject_num</strong> (<em>int</em>) – subject index</p></li>
+<li><p><strong>run_num</strong> (<em>int</em>) – run index</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrames with gait parameters for the left and right foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.pipeline.abstract_pipeline_components">
+<span id="src-pipeline-abstract-pipeline-components-module"></span><h2>src.pipeline.abstract_pipeline_components module<a class="headerlink" href="#module-src.pipeline.abstract_pipeline_components" title="Permalink to this headline">¶</a></h2>
+<p>This module implements the abstract classes/interfaces of all variable pipeline components.</p>
+<dl class="py class">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractDataLoader">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.abstract_pipeline_components.</code><code class="sig-name descname">AbstractDataLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractDataLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The AbstractDataLoader defines the interface for any kind of IMU data loader.</p>
+<dl class="py method">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractDataLoader.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractDataLoader.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the loaded data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>IMU data from all sensors</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, <a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU">IMU</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractDataLoader.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractDataLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is called at instantiation and needs to be implemented by the derived class.
+It is expected to find the actual data files based on the given parameters
+and store them as a dictionary of IMU objects into self.data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw_base_path</strong> (<em>str</em>) – Base folder for every dataset</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Folder containing the dataset</p></li>
+<li><p><strong>subject</strong> (<em>str</em>) – Subject identifier</p></li>
+<li><p><strong>run</strong> (<em>str</em>) – Run identifier</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractEventDetector">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.abstract_pipeline_components.</code><code class="sig-name descname">AbstractEventDetector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractEventDetector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The AbstractEventDetector defines the interface for any kind of event detection algorithm.</p>
+<dl class="py method">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractEventDetector.detect">
+<code class="sig-name descname">detect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractEventDetector.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is expected to be implemented by each event detection algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dictionaries containing gait event information for each foot.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(dict[str, dict])</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractReferenceLoader">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.abstract_pipeline_components.</code><code class="sig-name descname">AbstractReferenceLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">interim_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em>, <em class="sig-param"><span class="n">overwrite</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractReferenceLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The AbstractReferenceLoader defines the interface for any kind of reference data loader.</p>
+<dl class="py method">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractReferenceLoader.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractReferenceLoader.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the loaded reference data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrames with gait parameters for the left and right foot</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractReferenceLoader.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractReferenceLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is called at instantiation and needs to be implemented by the derived class.
+It is expected to find the actual data files based on the given parameters
+and store reference data for the left and right foot in self.data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractTrajectoryEstimator">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.abstract_pipeline_components.</code><code class="sig-name descname">AbstractTrajectoryEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractTrajectoryEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The AbstractTrajectoryEstimator defines the interface for each trajectory estimation algorithm.</p>
+<dl class="py method">
+<dt id="src.pipeline.abstract_pipeline_components.AbstractTrajectoryEstimator.estimate">
+<code class="sig-name descname">estimate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">interim_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject_num</span></em>, <em class="sig-param"><span class="n">run_num</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.abstract_pipeline_components.AbstractTrajectoryEstimator.estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is expected to be implemented by each trajectory estimation algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interim_base_path</strong> (<em>str</em>) – Base folder where interim data can be stored</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Folder containing the dataset</p></li>
+<li><p><strong>subject_num</strong> (<em>int</em>) – Subject index</p></li>
+<li><p><strong>run_num</strong> (<em>int</em>) – Run index</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrames containing trajectory information for each foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.pipeline.data_loader">
+<span id="src-pipeline-data-loader-module"></span><h2>src.pipeline.data_loader module<a class="headerlink" href="#module-src.pipeline.data_loader" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the implementations of actual IMU data loaders
+A data loader is expected to implement functionality that builds a
+number of IMU objects from data specified by the given parameters.</p>
+<dl class="py class">
+<dt id="src.pipeline.data_loader.MatlabDataLoader">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.data_loader.</code><code class="sig-name descname">MatlabDataLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.data_loader.MatlabDataLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.abstract_pipeline_components.AbstractDataLoader</span></code></p>
+<p>This class reads data from a CSV file as exported from a MATLAB script.</p>
+<dl class="py method">
+<dt id="src.pipeline.data_loader.MatlabDataLoader.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.data_loader.MatlabDataLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>The load function is called at instantiation (see AbstractDataLoader).</p>
+<p>It loads the data specified by the given parameters and stores it into self.data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw_base_path</strong> (<em>str</em>) – Base folder for every dataset</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Folder containing the dataset</p></li>
+<li><p><strong>subject</strong> (<em>str</em>) – Subject identifier</p></li>
+<li><p><strong>run</strong> (<em>str</em>) – Run identifier</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.pipeline.data_loader.PhysilogDataLoader">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.data_loader.</code><code class="sig-name descname">PhysilogDataLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.data_loader.PhysilogDataLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.abstract_pipeline_components.AbstractDataLoader</span></code></p>
+<p>This class reads data from CSV files as generated by the PhysilogRTK.</p>
+<dl class="py method">
+<dt id="src.pipeline.data_loader.PhysilogDataLoader.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.data_loader.PhysilogDataLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>The load function is called at instantiation (see AbstractDataLoader).</p>
+<p>It loads the data specified by the given parameters and stores it into self.data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw_base_path</strong> (<em>str</em>) – Base folder for every dataset</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Folder containing the dataset</p></li>
+<li><p><strong>subject</strong> (<em>str</em>) – Subject identifier</p></li>
+<li><p><strong>run</strong> (<em>str</em>) – Run identifier</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.pipeline.reference_loader">
+<span id="src-pipeline-reference-loader-module"></span><h2>src.pipeline.reference_loader module<a class="headerlink" href="#module-src.pipeline.reference_loader" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the data loaders for different reference systems.</p>
+<dl class="py class">
+<dt id="src.pipeline.reference_loader.OptogaitReferenceLoader">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.reference_loader.</code><code class="sig-name descname">OptogaitReferenceLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">interim_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em>, <em class="sig-param"><span class="n">overwrite</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.reference_loader.OptogaitReferenceLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.abstract_pipeline_components.AbstractReferenceLoader</span></code></p>
+<p>This class loads reference data created by the OptoGait system.</p>
+<dl class="py method">
+<dt id="src.pipeline.reference_loader.OptogaitReferenceLoader.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.reference_loader.OptogaitReferenceLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the data based on parameters provided in the constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.pipeline.reference_loader.ZebrisReferenceLoader">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.reference_loader.</code><code class="sig-name descname">ZebrisReferenceLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">raw_base_path</span></em>, <em class="sig-param"><span class="n">interim_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em>, <em class="sig-param"><span class="n">overwrite</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.reference_loader.ZebrisReferenceLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.abstract_pipeline_components.AbstractReferenceLoader</span></code></p>
+<p>This class loads reference data created by the Zebris FDM-THQ system.
+It uses caching, since the extraction of foot positions from the Zebris raw data
+requires some computation and only needs to be done once.
+This computation is outsourced to the ZebrisJsonReader that can be also used to generate
+visualizations and inspect the data.</p>
+<dl class="py method">
+<dt id="src.pipeline.reference_loader.ZebrisReferenceLoader.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.reference_loader.ZebrisReferenceLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the data based on parameters provided in the constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.reference_loader.ZebrisReferenceLoader.load_interim_data">
+<code class="sig-name descname">load_interim_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.reference_loader.ZebrisReferenceLoader.load_interim_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load data from cached files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.reference_loader.ZebrisReferenceLoader.load_raw_data">
+<code class="sig-name descname">load_raw_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.reference_loader.ZebrisReferenceLoader.load_raw_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load data from raw data files.
+Zebris has two types of files (_raw and _steps).
+_raw files contain raw sensor readings.
+_steps files contain aggregated data per roll-off cycle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.pipeline.trajectory_estimator">
+<span id="src-pipeline-trajectory-estimator-module"></span><h2>src.pipeline.trajectory_estimator module<a class="headerlink" href="#module-src.pipeline.trajectory_estimator" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the implementation of a trajectory estimator.</p>
+<dl class="py class">
+<dt id="src.pipeline.trajectory_estimator.TuncaTrajectoryEstimator">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.trajectory_estimator.</code><code class="sig-name descname">TuncaTrajectoryEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.trajectory_estimator.TuncaTrajectoryEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.abstract_pipeline_components.AbstractTrajectoryEstimator</span></code></p>
+<p>Trajectory estimator based on Tunca et al. (<a class="reference external" href="https://doi.org/10.3390/s17040825">https://doi.org/10.3390/s17040825</a>).
+The actual error-state Kalman filter is implemented in trajectory_estimation/filter.py</p>
+<dl class="py method">
+<dt id="src.pipeline.trajectory_estimator.TuncaTrajectoryEstimator.estimate">
+<code class="sig-name descname">estimate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">interim_base_path</span></em>, <em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">subject</span></em>, <em class="sig-param"><span class="n">run</span></em>, <em class="sig-param"><span class="n">imu_ic</span></em>, <em class="sig-param"><span class="n">stance_thresholds</span></em>, <em class="sig-param"><span class="n">overwrite</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.trajectory_estimator.TuncaTrajectoryEstimator.estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate trajectories from IMU data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the configuration (used to identify cache files)</p></li>
+<li><p><strong>interim_base_path</strong> (<em>str</em>) – Folder where caching data can be stored</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Folder containing the dataset</p></li>
+<li><p><strong>subject</strong> (<em>str</em>) – Identifier of the subject</p></li>
+<li><p><strong>run</strong> (<em>str</em>) – Identifier of the run</p></li>
+<li><p><strong>imu_ic</strong> (<em>float</em>) – timestamp of initial contact in the IMU data</p></li>
+<li><p><strong>stance_thresholds</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>) – Gyroscope magnitude and stance count thresholds for stance detection for the right and left foot</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em>) – Flag if cached files should be overwritten</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrames with trajectory information for the right and left foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.pipeline.event_detector">
+<span id="src-pipeline-event-detector-module"></span><h2>src.pipeline.event_detector module<a class="headerlink" href="#module-src.pipeline.event_detector" title="Permalink to this headline">¶</a></h2>
+<p>This module contains implementation of different gait event detectors.</p>
+<dl class="py class">
+<dt id="src.pipeline.event_detector.HundzaEventDetector">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.event_detector.</code><code class="sig-name descname">HundzaEventDetector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.event_detector.HundzaEventDetector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.abstract_pipeline_components.AbstractEventDetector</span></code></p>
+<p>Gait event detection by Hundza et al. (<a class="reference external" href="https://doi.org/10.1109/TNSRE.2013.2282080">https://doi.org/10.1109/TNSRE.2013.2282080</a>)
+An example of another gait event detection algorithm.
+This EventDetector is for demonstration only and has not been evaluated.</p>
+<dl class="py method">
+<dt id="src.pipeline.event_detector.HundzaEventDetector.detect">
+<code class="sig-name descname">detect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.event_detector.HundzaEventDetector.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect gait events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>TOFS, IOFS and TO events</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.pipeline.event_detector.TuncaEventDetector">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.event_detector.</code><code class="sig-name descname">TuncaEventDetector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.event_detector.TuncaEventDetector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.abstract_pipeline_components.AbstractEventDetector</span></code></p>
+<p>Gait event detection as presented by Tunca et al. (<a class="reference external" href="https://doi.org/10.3390/s17040825">https://doi.org/10.3390/s17040825</a>).
+The actual algorithm is implemented in event_datection/imu_event_detection.py</p>
+<dl class="py method">
+<dt id="src.pipeline.event_detector.TuncaEventDetector.detect">
+<code class="sig-name descname">detect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stance_thresholds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.event_detector.TuncaEventDetector.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect gait events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stance_thresholds</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>) – Gyroscope magnitude and stance count thresholds for stance detection</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>IC and FO samples and timestamps for the right and left foot.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.pipeline.gait_parameters">
+<span id="src-pipeline-gait-parameters-module"></span><h2>src.pipeline.gait_parameters module<a class="headerlink" href="#module-src.pipeline.gait_parameters" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the GaitParameters class.</p>
+<dl class="py class">
+<dt id="src.pipeline.gait_parameters.GaitParameters">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.gait_parameters.</code><code class="sig-name descname">GaitParameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span></em>, <em class="sig-param"><span class="n">gait_events</span></em>, <em class="sig-param"><span class="n">initial_contact</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.gait_parameters.GaitParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class merges trajectories and gait events together and calculates
+the gait parameters stride length, stride time, swing time and stance time.</p>
+<dl class="py method">
+<dt id="src.pipeline.gait_parameters.GaitParameters.adjust_data">
+<code class="sig-name descname">adjust_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.gait_parameters.GaitParameters.adjust_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjust gait events so that the data starts and ends with a start event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.gait_parameters.GaitParameters.stance_time">
+<code class="sig-name descname">stance_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.gait_parameters.GaitParameters.stance_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate stance time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of stance times for the right and left foot</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.gait_parameters.GaitParameters.stride_length">
+<code class="sig-name descname">stride_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.gait_parameters.GaitParameters.stride_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate stride length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of stride length for the right and left foot</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.gait_parameters.GaitParameters.stride_time">
+<code class="sig-name descname">stride_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.gait_parameters.GaitParameters.stride_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate stride time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of stride times for the right and left foot</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.gait_parameters.GaitParameters.summary">
+<code class="sig-name descname">summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.gait_parameters.GaitParameters.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the actual gait parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame with the gait parameters</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.gait_parameters.GaitParameters.swing_time">
+<code class="sig-name descname">swing_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.gait_parameters.GaitParameters.swing_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate swing time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of swing times for the right and left foot</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.pipeline.evaluator">
+<span id="src-pipeline-evaluator-module"></span><h2>src.pipeline.evaluator module<a class="headerlink" href="#module-src.pipeline.evaluator" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the implementation of the Evaluator.</p>
+<dl class="py class">
+<dt id="src.pipeline.evaluator.Evaluator">
+<em class="property">class </em><code class="sig-prename descclassname">src.pipeline.evaluator.</code><code class="sig-name descname">Evaluator</code><a class="headerlink" href="#src.pipeline.evaluator.Evaluator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Evaluator merges temporal and spatial gait parameters
+from the trajectory estimation algorithm, the gait event
+detection algorithm and the reference system and creates
+plots and metrics in order to assess the quality of the
+used algorithms and data.</p>
+<p>The pipeline is meant to be executed for each trial individually.
+The results of the pipeline are then added to the Evaluator using
+add_data().</p>
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.add_data">
+<code class="sig-name descname">add_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subject_num</span></em>, <em class="sig-param"><span class="n">run_num</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">reference_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.add_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new pair of IMU and reference data for one trial.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subject_num</strong> (<em>int</em>) – Subject index</p></li>
+<li><p><strong>run_num</strong> (<em>int</em>) – Run index</p></li>
+<li><p><strong>data</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>DataFrame</em><em>]</em>) – Gait parameters produced by the pipeline for each foot</p></li>
+<li><p><strong>reference_data</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>DataFrame</em><em>]</em>) – Reference gait parameters for each foot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.detect_outliers">
+<code class="sig-name descname">detect_outliers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">column</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.detect_outliers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect outliers via z-score and maximum deviation for one column.
+Marks the outliers in a special boolean column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>column</strong> (<em>str</em>) – Name of the column under consideration (stride_length, stride_time, swing_time, stance_time).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.filter_outliers">
+<code class="sig-name descname">filter_outliers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.filter_outliers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select all datapoints that have not been labeled previously as outliers by detect_outliers().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – DataFrame with outliers marked in column “outlier”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Filtered DataFrame without outliers</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the evaluation results from a json file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – filename of the saved data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.match_timestamps">
+<code class="sig-name descname">match_timestamps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.match_timestamps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match timestamps from reference system and IMUs.
+All timestamps are zero based to the timestamp of initial contact.
+In order to match gait parameters form the reference system and IMUs
+stride by stride, they are merged based on minimal time difference
+of the timestamps within a certain tolerance.
+Strides that cannot be matched are dropped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.merge_sides">
+<code class="sig-name descname">merge_sides</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">merged_subject_runs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.merge_sides" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge data from left and right foot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>merged_subject_runs</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>DataFrame</em><em>]</em>) – DataFrames for left and right foot</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Merged DataFrame for both, left and right foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.merge_subject_runs">
+<code class="sig-name descname">merge_subject_runs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subject_run_nums</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.merge_subject_runs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge data from all subjects and runs into one DataFrame and
+add special columns for subject and run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subject_run_num</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>) – list of subject and run numbers that should be merged</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>merged DataFrame for each foot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.plot_bland_altmann">
+<code class="sig-name descname">plot_bland_altmann</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">column</span></em>, <em class="sig-param"><span class="n">subject_run_nums</span></em>, <em class="sig-param"><span class="n">reference_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.plot_bland_altmann" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create Bland-Altman plots of IMU data and reference data for the selected subjects and runs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> (<em>str</em>) – Name of the data column that should be plotted</p></li>
+<li><p><strong>subject_run_nums</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>) – List of subject and run indices</p></li>
+<li><p><strong>reference_name</strong> (<em>str</em>) – Name of the reference system (used as axis label)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.plot_correlation">
+<code class="sig-name descname">plot_correlation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">column</span></em>, <em class="sig-param"><span class="n">subject_run_nums</span></em>, <em class="sig-param"><span class="n">reference_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.plot_correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create correlation plot of IMU data and reference data for the selected subjects and runs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – Title of the plot</p></li>
+<li><p><strong>column</strong> (<em>str</em>) – Name of the data column that should be plotted</p></li>
+<li><p><strong>subject_run_nums</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>) – List of subject and run indices</p></li>
+<li><p><strong>reference_name</strong> (<em>str</em>) – Name of the reference system (used as axis label)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.reg_line">
+<code class="sig-name descname">reg_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.reg_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate linear regression on two dimensional data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – x values of the data</p></li>
+<li><p><strong>y</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – y values of the data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x values of the regression line, y values of the regression line, calculated regression line parameters (gradient, intercept, r_value, p_value, std_err, rmse, mae), p-values of the statistical model, confidence interval</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(list[float], ..)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.pipeline.evaluator.Evaluator.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.pipeline.evaluator.Evaluator.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the evaluation results to a json file.
+This can be handy if different plots should be produced
+without rerunning the whole pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – filename for the saved data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">src.pipeline package</a><ul>
+<li><a class="reference internal" href="#module-src.pipeline.pipeline">src.pipeline.pipeline module</a></li>
+<li><a class="reference internal" href="#module-src.pipeline.abstract_pipeline_components">src.pipeline.abstract_pipeline_components module</a></li>
+<li><a class="reference internal" href="#module-src.pipeline.data_loader">src.pipeline.data_loader module</a></li>
+<li><a class="reference internal" href="#module-src.pipeline.reference_loader">src.pipeline.reference_loader module</a></li>
+<li><a class="reference internal" href="#module-src.pipeline.trajectory_estimator">src.pipeline.trajectory_estimator module</a></li>
+<li><a class="reference internal" href="#module-src.pipeline.event_detector">src.pipeline.event_detector module</a></li>
+<li><a class="reference internal" href="#module-src.pipeline.gait_parameters">src.pipeline.gait_parameters module</a></li>
+<li><a class="reference internal" href="#module-src.pipeline.evaluator">src.pipeline.evaluator module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.preprocessing.html"
+                        title="previous chapter">src.preprocessing package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.data_reader.html"
+                        title="next chapter">src.data_reader package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/src.pipeline.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.data_reader.html" title="src.data_reader package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.preprocessing.html" title="src.preprocessing package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.pipeline package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Justin Trautmann.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.0.
+    </div>
+  </body>
+</html>

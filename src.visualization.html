@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.visualization package &#8212; TRIPOD 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="src.trajectory_estimation package" href="src.trajectory_estimation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.trajectory_estimation.html" title="src.trajectory_estimation package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" accesskey="U">src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.visualization package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="src-visualization-package">
+<h1>src.visualization package<a class="headerlink" href="#src-visualization-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-src.visualization.plot">
+<span id="src-visualization-plot-module"></span><h2>src.visualization.plot module<a class="headerlink" href="#module-src.visualization.plot" title="Permalink to this headline">¶</a></h2>
+<p>This module contains various plotting functions.
+Not all of them are actually used in the pipeline but could be potentially useful.
+Some plotting functions can be stacked, resulting in complex plots.
+Therefore, show() needs to be called manually to display the plots.</p>
+<dl class="py function">
+<dt id="src.visualization.plot.plot_1d">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_1d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_1d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a 1D array. Generate regular spacing if x is None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – y values</p></li>
+<li><p><strong>x</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – optional - value spacing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_2d_lateral_view">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_2d_lateral_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span></em>, <em class="sig-param"><span class="n">stance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">as_subplot</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_2d_lateral_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots trajectory in 2D (lateral view, height and distance from origin).
+Optionally mark stance phase.
+Optionally add this as subplot. Used to overlay multiple steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<em>np.array</em>) – 3D position for each timestep</p></li>
+<li><p><strong>stance</strong> (<em>np.array</em>) – optional bool array, indicating stance phase</p></li>
+<li><p><strong>as_subplot</strong> (<em>bool</em>) – used if called from plot_steps()</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_3d_view">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_3d_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_3d_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots 3D trajectory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>position</strong> (<em>np.array</em>) – 3D coordinates for each timestep</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_3d_view_speed">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_3d_view_speed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span></em>, <em class="sig-param"><span class="n">speed</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_3d_view_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots 3D trajectory colored by speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<em>np.array</em>) – 3D position for each timestep</p></li>
+<li><p><strong>speed</strong> (<em>np.array</em>) – speed for each timestep</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_3d_view_with_stance">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_3d_view_with_stance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span></em>, <em class="sig-param"><span class="n">stance</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_3d_view_with_stance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots trajectory in 3D and colors stance phases differently.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<em>np.array</em>) – 3D position for each timestep</p></li>
+<li><p><strong>stance</strong> (<em>np.array</em>) – bool array indicating stance for each timestep</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_accel_gyro">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_accel_gyro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_accel_gyro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots acceleration and gyroscope raw values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>imu</strong> (<a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a>) – IMU object with data to plot</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_gyro_magnitude">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_gyro_magnitude</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imu</span></em>, <em class="sig-param"><span class="n">stance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_gyro_magnitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot gyroscope magnitude</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imu</strong> (<a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a>) – IMU object with data</p></li>
+<li><p><strong>stance</strong> (<em>np.array</em>) – optional stance indicators. If set, an overlay is plotted</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – optional - If set, a horizontal line at the specified height is drawn</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_imu_accel_mag">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_imu_accel_mag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_imu_accel_mag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots acceleration magnitude.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>imu</strong> (<a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a>) – IMU object with data to plot</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_multi_3d_view">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_multi_3d_view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">positions</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_multi_3d_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots multiple trajectories in one 3D graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>positions</strong> (<em>list</em><em>[</em><em>np.array</em><em>]</em>) – multiple arrays of 3D coordinates for each timestep</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_stance_overlay">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_stance_overlay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span></em>, <em class="sig-param"><span class="n">stance</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_stance_overlay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot transparent overlay during stance phases.
+This makes it easy to visualize stance phases in any signal plot and adapt the
+threshold that is used to identify these phases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stance</strong> (<em>np.array</em>) – bool array, indicating stance for each timestep</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.plot_steps">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">plot_steps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">steps</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.plot_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a 2D view of overlayed steps.
+This can be used to compare the shape of trajectories of different steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>steps</strong> (<em>list</em><em>[</em><em>np.array</em><em>]</em>) – multiple arrays of 3D coordinates for each timestep</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.set_3d_axes_equal">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">set_3d_axes_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ax</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.set_3d_axes_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all axes to an equal scale.
+Note: ax.set_aspect(‘equal’) is not available for 3D.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes</em>) – Axes of the plot</p></li>
+<li><p><strong>data</strong> (<em>np.array</em>) – 3D data that is plotted along the axes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.set_3d_xy_axes_equal">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">set_3d_xy_axes_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ax</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.set_3d_xy_axes_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets horizontal axes to an equal scale.
+This is relevant for displaying foot trajectories.
+Since the height of a step is very small compared to the length,
+horizontal and vertical axes should be scaled differently in order to
+see actual change along the vertical axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes</em>) – Axes of the plot</p></li>
+<li><p><strong>data</strong> (<em>np.array</em>) – 3D data that is plotted along the axes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.visualization.plot.show">
+<code class="sig-prename descclassname">src.visualization.plot.</code><code class="sig-name descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.visualization.plot.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the plot. Proxy for plt.show() so matplotlib.pyplot doesnt have to be imported.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">src.visualization package</a><ul>
+<li><a class="reference internal" href="#module-src.visualization.plot">src.visualization.plot module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.trajectory_estimation.html"
+                        title="previous chapter">src.trajectory_estimation package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/src.visualization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.trajectory_estimation.html" title="src.trajectory_estimation package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.visualization package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Justin Trautmann.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.0.
+    </div>
+  </body>
+</html>

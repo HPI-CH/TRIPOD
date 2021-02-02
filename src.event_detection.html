@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.event_detection package &#8212; TRIPOD 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.trajectory_estimation package" href="src.trajectory_estimation.html" />
+    <link rel="prev" title="src.data_reader package" href="src.data_reader.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.trajectory_estimation.html" title="src.trajectory_estimation package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.data_reader.html" title="src.data_reader package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" accesskey="U">src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.event_detection package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="src-event-detection-package">
+<h1>src.event_detection package<a class="headerlink" href="#src-event-detection-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-src.event_detection.imu_event_detection">
+<span id="src-event-detection-imu-event-detection-module"></span><h2>src.event_detection.imu_event_detection module<a class="headerlink" href="#module-src.event_detection.imu_event_detection" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="src.event_detection.imu_event_detection.gyro_threshold_stance">
+<code class="sig-prename descclassname">src.event_detection.imu_event_detection.</code><code class="sig-name descname">gyro_threshold_stance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imu</span></em>, <em class="sig-param"><span class="n">stance_magnitude_threshold</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">stance_count_threshold</span><span class="o">=</span><span class="default_value">8</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.event_detection.imu_event_detection.gyro_threshold_stance" title="Permalink to this definition">¶</a></dt>
+<dd><p>As presented by Tunca et al. (<a class="reference external" href="https://doi.org/10.3390/s17040825">https://doi.org/10.3390/s17040825</a>).
+Detect stance phases according to the given gyroscope magnitude, and minimum sample length threshold value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imu</strong> (<a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a>) – IMU object with data</p></li>
+<li><p><strong>stance_magnitude_threshold</strong> (<em>float</em>) – magnitude threshold</p></li>
+<li><p><strong>stance_count_threshold</strong> (<em>int</em>) – grace period in samples</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Boolean vector indicating stance phases</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.event_detection.imu_event_detection.hundza_gait_events">
+<code class="sig-prename descclassname">src.event_detection.imu_event_detection.</code><code class="sig-name descname">hundza_gait_events</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.event_detection.imu_event_detection.hundza_gait_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gait event detection by Hundza et al. (<a class="reference external" href="https://doi.org/10.1109/TNSRE.2013.2282080">https://doi.org/10.1109/TNSRE.2013.2282080</a>)
+An example of another gait event detection algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>imu</strong> (<a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a>) – IMU object with data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>timesteps of different gait events TOFS, IOFS, TO (see Hundza paper) and stance vector</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple[list[float], ..]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.event_detection.imu_event_detection.tunca_gait_events">
+<code class="sig-prename descclassname">src.event_detection.imu_event_detection.</code><code class="sig-name descname">tunca_gait_events</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imu</span></em>, <em class="sig-param"><span class="n">stance_magnitude_threshold</span></em>, <em class="sig-param"><span class="n">stance_count_threshold</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.event_detection.imu_event_detection.tunca_gait_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gait event detection by Tunca et al. (<a class="reference external" href="https://doi.org/10.3390/s17040825">https://doi.org/10.3390/s17040825</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imu</strong> (<a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a>) – IMU object with data</p></li>
+<li><p><strong>gyro_threshold</strong> (<em>float</em>) – gyroscope threshold for identifying stance phases</p></li>
+<li><p><strong>stance_count_threshold</strong> (<em>int</em>) – stance count threshold for identifying stance phases</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>index of IC_samples, FO_samples, timestamps of IC_times, FO_times and stance indicator</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple[list[float], ..]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.event_detection.imu_event_detection.zero_crossing">
+<code class="sig-prename descclassname">src.event_detection.imu_event_detection.</code><code class="sig-name descname">zero_crossing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_1</span></em>, <em class="sig-param"><span class="n">x_2</span></em>, <em class="sig-param"><span class="n">y_1</span></em>, <em class="sig-param"><span class="n">y_2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.event_detection.imu_event_detection.zero_crossing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function: linear interpolation for zero crossing between points (x_1, y_1) and (x_2, y_2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_1</strong> (<em>float</em>) – x coordinate point 1</p></li>
+<li><p><strong>x_2</strong> (<em>float</em>) – x coordinate point 2</p></li>
+<li><p><strong>y_1</strong> (<em>float</em>) – y coordinate point 1</p></li>
+<li><p><strong>y_2</strong> (<em>float</em>) – y coordinate point 2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x value for zero-crossing point</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">src.event_detection package</a><ul>
+<li><a class="reference internal" href="#module-src.event_detection.imu_event_detection">src.event_detection.imu_event_detection module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.data_reader.html"
+                        title="previous chapter">src.data_reader package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.trajectory_estimation.html"
+                        title="next chapter">src.trajectory_estimation package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/src.event_detection.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.trajectory_estimation.html" title="src.trajectory_estimation package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.data_reader.html" title="src.data_reader package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.event_detection package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Justin Trautmann.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.0.
+    </div>
+  </body>
+</html>

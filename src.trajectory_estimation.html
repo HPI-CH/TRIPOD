@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.trajectory_estimation package &#8212; TRIPOD 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.visualization package" href="src.visualization.html" />
+    <link rel="prev" title="src.event_detection package" href="src.event_detection.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.visualization.html" title="src.visualization package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.event_detection.html" title="src.event_detection package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" accesskey="U">src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.trajectory_estimation package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="src-trajectory-estimation-package">
+<h1>src.trajectory_estimation package<a class="headerlink" href="#src-trajectory-estimation-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-src.trajectory_estimation.filter">
+<span id="src-trajectory-estimation-filter-module"></span><h2>src.trajectory_estimation.filter module<a class="headerlink" href="#module-src.trajectory_estimation.filter" title="Permalink to this headline">¶</a></h2>
+<p>This module contains various implementations of trajectory estimators and necessary helper functions.</p>
+<dl class="py function">
+<dt id="src.trajectory_estimation.filter.acc_to_euler">
+<code class="sig-prename descclassname">src.trajectory_estimation.filter.</code><code class="sig-name descname">acc_to_euler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">acc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.trajectory_estimation.filter.acc_to_euler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the 3D orientation vector (rad) from 3D acceleration measurement,
+assuming that there is no translational movement.
+Note: the z-coordinate is always zero since horizontal rotation cannot be tracked by an accelerometer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>acc</strong> (<em>np.array</em>) – acceleration measurement</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>oriantation vector</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.trajectory_estimation.filter.complementary_filter">
+<code class="sig-prename descclassname">src.trajectory_estimation.filter.</code><code class="sig-name descname">complementary_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span></em>, <em class="sig-param"><span class="n">acc</span></em>, <em class="sig-param"><span class="n">gyro</span></em>, <em class="sig-param"><span class="n">a</span><span class="o">=</span><span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.trajectory_estimation.filter.complementary_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Complementary filter to fusion accelerometer and gyroscope measurements.
+Calculate the deduced orientation time series from accelerometer and gyroscope
+Note: a quantifies the “trust” for the accelerometer or the “misstrust” for the gyroscope.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>np.array</em>) – timestamps</p></li>
+<li><p><strong>acc</strong> (<em>np.array</em>) – 3D acceleration measurements</p></li>
+<li><p><strong>gyro</strong> (<em>np.array</em>) – 3D gyroscope measurements</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – complementary factor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Orientation vector timeseries</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.trajectory_estimation.filter.error_state_kalman_filter">
+<code class="sig-prename descclassname">src.trajectory_estimation.filter.</code><code class="sig-name descname">error_state_kalman_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imu</span></em>, <em class="sig-param"><span class="n">imu_ic</span></em>, <em class="sig-param"><span class="n">zero_z</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">zero_xz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">zero_xyz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">stance_magnitude_threshold</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">stance_count_threshold</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'euler'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.trajectory_estimation.filter.error_state_kalman_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error-state Kalman Filter inspired by <a class="reference external" href="https://doi.org/10.3390/s17040825">https://doi.org/10.3390/s17040825</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imu</strong> (<a class="reference internal" href="src.data_reader.html#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU"><em>IMU</em></a>) – IMU object with measurement data</p></li>
+<li><p><strong>imu_ic</strong> (<em>float</em>) – timestamp of initial contact</p></li>
+<li><p><strong>zero_z</strong> (<em>bool</em>) – flag if height should be reset each stride</p></li>
+<li><p><strong>zero_xz</strong> (<em>bool</em>) – flag if height and sideward movement should be reset each stride (if true, zero_z is ignored)</p></li>
+<li><p><strong>zero_xyz</strong> (<em>bool</em><em>) </em><em>flag if all position dimensions should be reset each stride</em><em> (</em><em>if true</em><em>, </em><em>zero_z and zero_xz are ignored</em>) – </p></li>
+<li><p><strong>stance_magnitude_threshold</strong> (<em>float</em>) – gyroscope magnitude threshold for stance event_detection</p></li>
+<li><p><strong>stance_count_threshold</strong> (<em>int</em>) – grace period in samples before and after stance detection</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – “euler” or “midpoint”, select used integration technique</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame with trajectory data for each timestep (time, position, velocity, rotation, stance)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.trajectory_estimation.filter.gyro_to_euler">
+<code class="sig-prename descclassname">src.trajectory_estimation.filter.</code><code class="sig-name descname">gyro_to_euler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orientation</span></em>, <em class="sig-param"><span class="n">gyro</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.trajectory_estimation.filter.gyro_to_euler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a 3D gyroscope measurement in the local frame (deg/s) to a global 3D orientation vector (rad)
+and calculates the 3D rotation vector (rad/s) in the global coordinate frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orientation</strong> (<em>np.array</em>) – initial orientation vector</p></li>
+<li><p><strong>gyro</strong> (<em>np.array</em>) – gyroscope signal vector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>rotation vector</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.trajectory_estimation.filter.kalman_filter">
+<code class="sig-prename descclassname">src.trajectory_estimation.filter.</code><code class="sig-name descname">kalman_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span></em>, <em class="sig-param"><span class="n">acc</span></em>, <em class="sig-param"><span class="n">gyro</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.trajectory_estimation.filter.kalman_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kalman filter implementation inspired by <a class="reference external" href="http://philsal.co.uk/projects/imu-attitude-estimation">http://philsal.co.uk/projects/imu-attitude-estimation</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>np.array</em>) – timestamps</p></li>
+<li><p><strong>acc</strong> (<em>np.array</em>) – 3D acceleration measurements</p></li>
+<li><p><strong>gyro</strong> (<em>np.array</em>) – 3D gyroscope measurements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>3D position timeseries</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list[list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">src.trajectory_estimation package</a><ul>
+<li><a class="reference internal" href="#module-src.trajectory_estimation.filter">src.trajectory_estimation.filter module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.event_detection.html"
+                        title="previous chapter">src.event_detection package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.visualization.html"
+                        title="next chapter">src.visualization package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/src.trajectory_estimation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.visualization.html" title="src.visualization package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.event_detection.html" title="src.event_detection package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.trajectory_estimation package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Justin Trautmann.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.0.
+    </div>
+  </body>
+</html>

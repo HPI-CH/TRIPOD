@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.preprocessing package &#8212; TRIPOD 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.pipeline package" href="src.pipeline.html" />
+    <link rel="prev" title="src package" href="src.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.pipeline.html" title="src.pipeline package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.html" title="src package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" accesskey="U">src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.preprocessing package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="src-preprocessing-package">
+<h1>src.preprocessing package<a class="headerlink" href="#src-preprocessing-package" title="Permalink to this headline">¶</a></h1>
+<p>The preprocessing package is not needed when working with the available dataset, since preprocessing has already been applied. However, it might become necessary if new data shall be integrated into the dataset.</p>
+<div class="section" id="module-src.preprocessing.anonymize">
+<span id="src-preprocessing-anonymize-module"></span><h2>src.preprocessing.anonymize module<a class="headerlink" href="#module-src.preprocessing.anonymize" title="Permalink to this headline">¶</a></h2>
+<p>This script anonymizes raw data by removing sensitive data</p>
+</div>
+<div class="section" id="module-src.preprocessing.check_clipping">
+<span id="src-preprocessing-check-clipping-module"></span><h2>src.preprocessing.check_clipping module<a class="headerlink" href="#module-src.preprocessing.check_clipping" title="Permalink to this headline">¶</a></h2>
+<p>This script checks if the recorded data is clipping.
+This can happen, since the IMUs record in a fixed range.</p>
+</div>
+<div class="section" id="module-src.preprocessing.convert_optogait">
+<span id="src-preprocessing-convert-optogait-module"></span><h2>src.preprocessing.convert_optogait module<a class="headerlink" href="#module-src.preprocessing.convert_optogait" title="Permalink to this headline">¶</a></h2>
+<p>This script converts all excel xml files from OptoGait to CSV files.
+Attention: Files are replaced (XML files are deleted)</p>
+</div>
+<div class="section" id="module-src.preprocessing.convert_zebris">
+<span id="src-preprocessing-convert-zebris-module"></span><h2>src.preprocessing.convert_zebris module<a class="headerlink" href="#module-src.preprocessing.convert_zebris" title="Permalink to this headline">¶</a></h2>
+<p>This script converts Zebris XML files into gzip compressed json files.
+Since Zebris produces nested data structures, the raw data cannot be stored in simple CSV files.
+The XML files turned out to be very large and need a lot of time to be loaded/parsed.
+Loading JSON files is significantly faster and can be performed via build-in functions in Pandas,
+without the need to care about parsing.
+However, JSON files are still quite big due to repetitive keywords. This can cause long loading
+times when reading from disk/network. Thus, the files are gzip compressed. This leads to fast
+loading and small files.</p>
+</div>
+<div class="section" id="module-src.preprocessing.get_imu_ic_gyro_threshold">
+<span id="src-preprocessing-get-imu-ic-gyro-threshold-module"></span><h2>src.preprocessing.get_imu_ic_gyro_threshold module<a class="headerlink" href="#module-src.preprocessing.get_imu_ic_gyro_threshold" title="Permalink to this headline">¶</a></h2>
+<p>Two different kinds of information need to get extracted from the IMU recordings only
+once and are therefore outsourced to this preprocessing script:
+The timestamp of initial contact and
+the gyroscope magnitude threshold that identifies stance phases best.</p>
+<p>In order to synchronize Optogait and/or Zebris recordings with the IMU recordings,
+the initial contact with the treadmill belt has to be found in the IMU data.
+Since the participants were asked to step on the running treadmill belt with their
+right foot first, the first peak in the acceleration data of the right foot corresponds
+to the initial contact.
+Therefore this script:
+Opens all right foot IMU CSV file in the base path,
+Finds first prominent peak (first peak with prominence &gt; 4, this threshold is chosen to
+fit the recorded data and might not be the best choice for other data recordings),
+Plot data to let user confirm/correct the peak by manually placing the moment of
+initial contact (e.g. by experience or with the help of the video recordings), and
+Exports a CSV file with the obtained timesteps</p>
+<p>Low gyroscope energy has turned out to be a good indicator for stance phases. However,
+the threshold to identify stance phases is different for each subject and trial.
+Therefore this script:
+Calculates stance phases based on a default threshold,
+Displays them, and let the user confirm/correct the threshold, and
+Exports a CSV file with the thresholds.</p>
+<dl class="py function">
+<dt id="src.preprocessing.get_imu_ic_gyro_threshold.ic_onclick">
+<code class="sig-prename descclassname">src.preprocessing.get_imu_ic_gyro_threshold.</code><code class="sig-name descname">ic_onclick</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.preprocessing.get_imu_ic_gyro_threshold.ic_onclick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event handler for click event</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.preprocessing.get_imu_ic_gyro_threshold.stance_onclick">
+<code class="sig-prename descclassname">src.preprocessing.get_imu_ic_gyro_threshold.</code><code class="sig-name descname">stance_onclick</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.preprocessing.get_imu_ic_gyro_threshold.stance_onclick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event handler for click event</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">src.preprocessing package</a><ul>
+<li><a class="reference internal" href="#module-src.preprocessing.anonymize">src.preprocessing.anonymize module</a></li>
+<li><a class="reference internal" href="#module-src.preprocessing.check_clipping">src.preprocessing.check_clipping module</a></li>
+<li><a class="reference internal" href="#module-src.preprocessing.convert_optogait">src.preprocessing.convert_optogait module</a></li>
+<li><a class="reference internal" href="#module-src.preprocessing.convert_zebris">src.preprocessing.convert_zebris module</a></li>
+<li><a class="reference internal" href="#module-src.preprocessing.get_imu_ic_gyro_threshold">src.preprocessing.get_imu_ic_gyro_threshold module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.html"
+                        title="previous chapter">src package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.pipeline.html"
+                        title="next chapter">src.pipeline package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/src.preprocessing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.pipeline.html" title="src.pipeline package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.html" title="src package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.preprocessing package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Justin Trautmann.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.0.
+    </div>
+  </body>
+</html>

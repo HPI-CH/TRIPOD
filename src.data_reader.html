@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.data_reader package &#8212; TRIPOD 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.event_detection package" href="src.event_detection.html" />
+    <link rel="prev" title="src.pipeline package" href="src.pipeline.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.event_detection.html" title="src.event_detection package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.pipeline.html" title="src.pipeline package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" accesskey="U">src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.data_reader package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="src-data-reader-package">
+<h1>src.data_reader package<a class="headerlink" href="#src-data-reader-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-src.data_reader.imu">
+<span id="src-data-reader-imu-module"></span><h2>src.data_reader.imu module<a class="headerlink" href="#module-src.data_reader.imu" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the IMU class.</p>
+<dl class="py class">
+<dt id="src.data_reader.imu.IMU">
+<em class="property">class </em><code class="sig-prename descclassname">src.data_reader.imu.</code><code class="sig-name descname">IMU</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An IMU object holds all the data recorded by an actual IMU and offers getter and conversion methods.</p>
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.acc_to_g">
+<code class="sig-name descname">acc_to_g</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.acc_to_g" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion method for acceleration data from m/s**2 to g.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.acc_to_meter_per_square_sec">
+<code class="sig-name descname">acc_to_meter_per_square_sec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.acc_to_meter_per_square_sec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion method for acceleration data from g to m/s**2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.accel">
+<code class="sig-name descname">accel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.accel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter method for acceleration.</p>
+<p>Depending on if i is specified, this returns either data from timestep i
+or the whole timeseries data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Optional - index of the data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data at the specified timestep i or all data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float or np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.accel_variance">
+<code class="sig-name descname">accel_variance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.accel_variance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate acceleration variance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>variance of acceleration</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.check_sampling">
+<code class="sig-name descname">check_sampling</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.check_sampling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate mean and standard deviation of the sampling rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>mean and std. deviation of sampling rate</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple(float, float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.crop">
+<code class="sig-name descname">crop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_time</span></em>, <em class="sig-param"><span class="n">max_time</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops data to timeframe between min_time and max_time.
+Attention: all other data is dropped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_time</strong> (<em>float</em>) – start time of cropping</p></li>
+<li><p><strong>max_time</strong> (<em>float</em>) – end time of cropping</p></li>
+<li><p><strong>inplace</strong> (<em>bool</em>) – flag if cropping should be performed inplace or on a copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If not inplace, a cropped copy of the IMU object is returned.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None or <a class="reference internal" href="#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU">IMU</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.gyro">
+<code class="sig-name descname">gyro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.gyro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter method for gyroscope data.</p>
+<p>Depending on if i is specified, this returns either data from timestep i
+or the whole timeseries data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Optional - index of the data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data at the specified timestep i or all data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float or np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.gyro_to_degree">
+<code class="sig-name descname">gyro_to_degree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.gyro_to_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion method for gyroscope data from rad to degree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.gyro_to_rad">
+<code class="sig-name descname">gyro_to_rad</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.gyro_to_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion method for gyroscope data from degree to rad.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.resample">
+<code class="sig-name descname">resample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.resample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resample a copy of IMU data to given frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>float</em>) – target frequency</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>resampled IMU copy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.data_reader.imu.IMU" title="src.data_reader.imu.IMU">IMU</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.time">
+<code class="sig-name descname">time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter method for timestamps.</p>
+<p>Depending on if i is specified, this returns either data from timestep i
+or the whole timeseries data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Optional - index of the data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data at the specified timestep i or all data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float or np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.time_shift">
+<code class="sig-name descname">time_shift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time_offset</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.time_shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shift time by a given offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time_offset</strong> (<em>float</em>) – offset used to shift time</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.imu.IMU.zero_base_time">
+<code class="sig-name descname">zero_base_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.imu.IMU.zero_base_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Let timestamps start at zero.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.data_reader.opto_gait_xml_reader">
+<span id="src-data-reader-opto-gait-xml-reader-module"></span><h2>src.data_reader.opto_gait_xml_reader module<a class="headerlink" href="#module-src.data_reader.opto_gait_xml_reader" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functionality that reads data from XML files as they can be exported from the OptoGait software.
+This is only used to initially convert the XML files to CSV files, since the Excal XML format is rather cumbersome.</p>
+<dl class="py function">
+<dt id="src.data_reader.opto_gait_xml_reader.read_opto_gait_raw_xml_simple">
+<code class="sig-prename descclassname">src.data_reader.opto_gait_xml_reader.</code><code class="sig-name descname">read_opto_gait_raw_xml_simple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.opto_gait_xml_reader.read_opto_gait_raw_xml_simple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read OptoGait raw data from the excel xml file.
+The main information is stored in the spreadsheet “simple”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_file</strong> (<em>str</em>) – xml input file name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame with information from the “simple” spreadsheet.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(DataFrame)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.data_reader.zebris_json_reader">
+<span id="src-data-reader-zebris-json-reader-module"></span><h2>src.data_reader.zebris_json_reader module<a class="headerlink" href="#module-src.data_reader.zebris_json_reader" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the ZebrisJsonReader.</p>
+<dl class="py class">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader">
+<em class="property">class </em><code class="sig-prename descclassname">src.data_reader.zebris_json_reader.</code><code class="sig-name descname">ZebrisJsonReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_data_file</span></em>, <em class="sig-param"><span class="n">step_data_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The ZebrisJsonReader can be used to read and load preprocessed Zebris files.
+Besides the functionality for extracting gait parameters from the data,
+this class provides functionality for creating images and videos from the data.</p>
+<dl class="py method">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader.get_raw_data">
+<code class="sig-name descname">get_raw_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader.get_raw_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get raw data.
+Lazy loading with caching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>raw data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader.get_step_data">
+<code class="sig-name descname">get_step_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader.get_step_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get step (aggregated) data.
+Lazy loading with caching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>step data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader.read_treadmill_velocity">
+<code class="sig-name descname">read_treadmill_velocity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader.read_treadmill_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read treadmill velocity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Treadmill velocity for each sample.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_heel_positions">
+<code class="sig-name descname">read_zebris_raw_json_heel_positions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">generate_images</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">generate_heel_image</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_heel_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zebris does not provide stride length out of the box.
+Therefore, the positions of heel strikes are measured
+in order to obtain stride length.
+This function can also be used to create a series of images
+that could be later merged into a video or used to inspect the
+raw data. Also an image of the performed heel detection can
+be exported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>generate_images</strong> (<em>bool</em>) – flag, if a series of images should be created</p></li>
+<li><p><strong>generate_heel_image</strong> (<em>bool</em>) – flag, if an image of the heel detection should be created</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Positions of heelstrike for the left and right foot.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(tuple[list[float], ..])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_ic_fo">
+<code class="sig-name descname">read_zebris_raw_json_ic_fo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_ic_fo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the initial contact and foot-off timestamps.
+Zebris provides this data as part of the aggregated data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrames of IC and FO timestamps for the left and right foot.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple[DataFrame, ..]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_initial_contact">
+<code class="sig-name descname">read_zebris_raw_json_initial_contact</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_initial_contact" title="Permalink to this definition">¶</a></dt>
+<dd><p>The aggregated data from Zebris does not contain the first step.
+However, the raw data does. Therefore, the initial contact timestamp
+needs to be extracted from the raw data and is not the start of the first
+“detected step”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>IC timestamp</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_to_video">
+<code class="sig-name descname">read_zebris_raw_json_to_video</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_reader.zebris_json_reader.ZebrisJsonReader.read_zebris_raw_json_to_video" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an mp4 video of the raw sensor data.
+The framerate will be the actual sensor reading rate (some players might have problems with unusual framerates).
+One pixel is one sensor cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>out_file</strong> (<em>str</em>) – mp4 file name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">src.data_reader package</a><ul>
+<li><a class="reference internal" href="#module-src.data_reader.imu">src.data_reader.imu module</a></li>
+<li><a class="reference internal" href="#module-src.data_reader.opto_gait_xml_reader">src.data_reader.opto_gait_xml_reader module</a></li>
+<li><a class="reference internal" href="#module-src.data_reader.zebris_json_reader">src.data_reader.zebris_json_reader module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.pipeline.html"
+                        title="previous chapter">src.pipeline package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.event_detection.html"
+                        title="next chapter">src.event_detection package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/src.data_reader.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.event_detection.html" title="src.event_detection package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.pipeline.html" title="src.pipeline package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TRIPOD 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src.data_reader package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Justin Trautmann.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.0.
+    </div>
+  </body>
+</html>
