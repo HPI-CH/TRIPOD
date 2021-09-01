@@ -2,6 +2,8 @@
 
 ## About
 
+This is a repository for the publication [TRIPOD—A Treadmill Walking Dataset with IMU, Pressure-Distribution and Photoelectric Data for Gait Analysis](https://doi.org/10.3390/data6090095). The dataset cen be found [here](https://doi.org/10.5281/zenodo.5070771).
+
 This repository contains a gait analysis data pipeline that can be used to:
  * load data from GaitUp Physilog IMUs 
  * load data from OptoGait
@@ -31,7 +33,7 @@ Create virtual environment with Python version 3.7 (for example using Conda) \
 Install requirements \
 ```pip install -r requirements.txt```
 
-Request data for scientific purposes [here](https://hpi-ch.github.io/TRIPOD/_static/data_request_form.html).
+Request data for scientific purposes [here](https://doi.org/10.5281/zenodo.5070771).
 
 Save data to ```./data/raw/```
 
