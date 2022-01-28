@@ -27,6 +27,7 @@ Exports a CSV file with the thresholds.
 
 import os
 import sys
+sys.path.append("./src/")
 
 from data_reader.imu import IMU
 from event_detection.imu_event_detection import gyro_threshold_stance
@@ -78,11 +79,11 @@ if __name__ == "__main__":
     select_vline = None
     selection_x_coordinate = None
 
-    base_path = "./data/raw/TRIPOD"
+    base_path = "./example_data/raw/TRIPOD_excerpt"
 
     # set flags according on what acction should be performed
     check_timestamps = True
-    check_stance_phase_manually = False
+    check_stance_phase_manually = True
 
     ic_timestamps = []
     gyro_thresholds = []
@@ -115,11 +116,21 @@ if __name__ == "__main__":
 
             if check_timestamps:
                 right_foot_path = os.path.join(run_directory, "IMU", "RF.csv")
+                imu_data = pd.read_csv(right_foot_path, header=4, skiprows=[6])
+                imu_data = imu_data[[
+                        "Time",
+                        "Gyro X",
+                        "Gyro Y",
+                        "Gyro Z",
+                        "Accel X",
+                        "Accel Y",
+                        "Accel Z",
+                    ]]
 
-                imu = IMU(right_foot_path)
+                imu = IMU(imu_data)
 
                 imu.check_sampling()
-                exit()
+                exit()  # uncomment to skip checking timestamps
 
                 time = imu.time()
                 accel = np.transpose(imu.accel())
@@ -160,7 +171,18 @@ if __name__ == "__main__":
                 stance_magnitude_threshold = 1.6
                 for foot in ["RF", "LF"]:
                     imu_path = os.path.join(run_directory, "IMU", foot + ".csv")
-                    imu = IMU(imu_path)
+                    imu_data = pd.read_csv(imu_path, header=4, skiprows=[6])
+                    imu_data = imu_data[[
+                        "Time",
+                        "Gyro X",
+                        "Gyro Y",
+                        "Gyro Z",
+                        "Accel X",
+                        "Accel Y",
+                        "Accel Z",
+                    ]]
+
+                    imu = IMU(imu_data)
                     imu.gyro_to_rad()
 
                     stance_count_threshold = 8
