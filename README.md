@@ -2,7 +2,7 @@
 
 ## About
 
-This is a repository for the publication [TRIPOD—A Treadmill Walking Dataset with IMU, Pressure-Distribution and Photoelectric Data for Gait Analysis](https://doi.org/10.3390/data6090095). The dataset cen be found [here](https://doi.org/10.5281/zenodo.5070771).
+This is a repository for the publication [TRIPOD—A Treadmill Walking Dataset with IMU, Pressure-Distribution and Photoelectric Data for Gait Analysis](https://doi.org/10.3390/data6090095). The dataset can be found [here](https://doi.org/10.5281/zenodo.5070771).
 
 This repository contains a gait analysis data pipeline that can be used to:
  * load data from GaitUp Physilog IMUs 
