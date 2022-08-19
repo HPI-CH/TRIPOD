@@ -18,7 +18,7 @@ The pipeline consists of the following building blocks:
 
 ![](docs/pipeline_overview.png)
 
-Further information can be found soon in a paper and the [documentation](https://hpi-ch.github.io/TRIPOD).
+Further information can be found the publication and the [documentation](https://hpi-ch.github.io/TRIPOD).
 
 ## Setup
 
